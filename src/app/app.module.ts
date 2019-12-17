@@ -13,10 +13,12 @@ import { httpInterceptorProviders } from './interceptors';
 import { AuthGuard } from './auth.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './custom.serializer';
+import { CustomersComponent } from './components/customers/customers.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CustomersComponent
   ],
   imports: [
     BrowserModule,
