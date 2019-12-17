@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodosComponent } from './todos.component';
+import { LoginComponent } from './components/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { featureName, reducers } from './reducers';
-import { EffectsModule } from '@ngrx/effects';
-import { ListEffects } from './effects/list.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './effects/login.effects';
 
 
 
 @NgModule({
-  declarations: [TodosComponent],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature(featureName, reducers),
     HttpClientModule,
-    EffectsModule.forFeature([ListEffects])
+    EffectsModule.forFeature([LoginEffects])
   ],
-  exports: [TodosComponent]
+  exports: [LoginComponent]
 })
-export class TodosModule { }
+export class AuthModule { }

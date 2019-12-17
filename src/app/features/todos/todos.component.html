@@ -10,7 +10,15 @@
 </div>
 
 <section>
+  <input type="button"
+         class="btn btn-success"
+         value="Load Data"
+         (click)="load()">
+
   <ul class="list-unstyled">
-    <li class="alert alert-info">Desription</li>
+    <li class="alert alert-info"
+        *ngFor="let todo of list$ | async">
+      {{todo.description}}
+    </li>
   </ul>
 </section>

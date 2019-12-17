@@ -1,9 +1,10 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { TodoEntity } from '../reducers/list.reducer';
 
 let tempId = 0;
 
 export const listItemAdded = createAction(
-  '[todo] list item added',
+  '[todos] list item added',
   ({ description }: { description: string }) => ({
     payload: {
       id: 'T' + tempId++,
@@ -11,4 +12,36 @@ export const listItemAdded = createAction(
       completed: false
     }
   })
+);
+
+export const listItemAddedSucceeded = createAction(
+  '[todos] list item added successfully',
+  props<{ oldId: string, payload: TodoEntity }>()
+);
+
+
+export const listItemAddedFailure = createAction(
+  '[todos] list item added failure',
+  props<{ message: string, payload: TodoEntity }>()
+);
+
+export const loadListData = createAction(
+  '[todos] load list data'
+);
+
+export const loadListDataSucceeded = createAction(
+  '[todos] load list data succeeded',
+  props<{ payload: TodoEntity[] }>()
+);
+
+
+export const loadListDataFailure = createAction(
+  '[todos] load list data failed',
+  props<{ message: string }>()
+);
+
+
+export const gotTodoFromWebSocket = createAction(
+  '[todos] got todo from websock',
+  props<{ payload: TodoEntity }>()
 );

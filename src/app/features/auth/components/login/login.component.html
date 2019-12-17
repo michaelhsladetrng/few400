@@ -1,0 +1,29 @@
+<div class="form-group row"
+     *ngIf="(isLoggedIn$ | async) === false">
+  <label for="username"
+         class="col-sm-1 col-form-label">User Name</label>
+  <div class="col-sm-2">
+    <input id="username"
+           #username
+           class="form-control">
+  </div>
+  <label for="password"
+         class="col-sm-1 col-form-label">Password</label>
+  <div class="col-sm-2">
+    <input id="password"
+           type="password"
+           #password
+           class="form-control">
+  </div>
+  <input type="button"
+         (click)="login(username, password)"
+         class="btn btn-success"
+         value="Login">
+</div>
+<div *ngIf="isLoggedIn$ | async">
+  <p>Hello, {{ userName$ | async }}</p>
+  <input type="button"
+         class="btn btn-sm btn-danger"
+         value="Log out"
+         (click)="logout()">
+</div>

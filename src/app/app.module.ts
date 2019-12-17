@@ -7,7 +7,9 @@ import { TodosModule } from './features/todos/todos.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { AuthModule } from './features/auth/auth.module';
+import { EffectsModule } from '@ngrx/effects';
+import { httpInterceptorProviders } from './interceptors';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,9 +19,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([]),
+    AuthModule,
     TodosModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
