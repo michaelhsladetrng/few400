@@ -1,17 +1,21 @@
 import * as fromRouter from '@ngrx/router-store';
-import { from } from 'rxjs';
+import { TodosState } from '../features/todos/reducers';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-
+import { selectUserIsLoggedIn } from '../features/auth/reducers';
 export interface AppState {
 
   router: fromRouter.RouterState.Minimal;
+
 }
 
 export const reducers = {
   router: fromRouter.routerReducer
 };
 
-const selectRouter = createFeatureSelector<AppState, fromRouter.RouterReducerState>('router');
+const selectRouter = createFeatureSelector<
+  AppState,
+  fromRouter.RouterReducerState
+>('router');
 
 export const selectTheUrlTheHardWay = createSelector(selectRouter, r => r.state.url);
 
@@ -26,9 +30,7 @@ export const {
 } = fromRouter.getSelectors(selectRouter);
 
 
-export const selectTodoId = selectRouteParam('id');
-export const selectPageNumber = selectQueryParam('page');
+// export const selectTodoId = selectRouteParam('id');
+// export const selectPageNumber = selectQueryParam('page');
 
 export const selectCustomerIdFromRoute = selectRouteParam('id');
-
-

@@ -7,7 +7,6 @@ import { map, switchMap, catchError, tap, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as appActions from '../../../actions/app.actions';
 import { Router } from '@angular/router';
-
 @Injectable()
 export class LoginEffects {
 

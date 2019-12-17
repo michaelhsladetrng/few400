@@ -14,7 +14,6 @@ import { AuthGuard } from './auth.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './custom.serializer';
 import { CustomersComponent } from './components/customers/customers.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +28,8 @@ import { CustomersComponent } from './components/customers/customers.component';
     AuthModule.forRoot(),
     TodosModule,
     StoreRouterConnectingModule.forRoot({
-      serializer: CustomSerializer
+      serializer: CustomSerializer,
+      stateKey: 'router'
     })
   ],
   providers: [httpInterceptorProviders, AuthGuard],
