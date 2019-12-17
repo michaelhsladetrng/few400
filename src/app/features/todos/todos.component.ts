@@ -4,6 +4,7 @@ import { TodosState, selectAllTodos } from './reducers';
 import { listItemAdded, loadListData } from './actions/list.actions';
 import { Observable } from 'rxjs';
 import { TodoEntity } from './reducers/list.reducer';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-todos',
@@ -13,10 +14,12 @@ import { TodoEntity } from './reducers/list.reducer';
 export class TodosComponent implements OnInit {
 
   list$: Observable<TodoEntity[]>;
-  constructor(private store: Store<TodosState>) { }
+
+  constructor(private store: Store<TodosState>, ) { }
 
   ngOnInit() {
     this.list$ = this.store.select(selectAllTodos);
+
   }
 
   add(what: HTMLInputElement) {

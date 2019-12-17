@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthState, selectUserIsLoggedIn, selectLoggedInUserName } from '../../reducers';
 import { loginRequest, logoutRequested } from '../../actions/user.actions';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(logoutRequested())
+    this.store.dispatch(logoutRequested());
   }
 }
