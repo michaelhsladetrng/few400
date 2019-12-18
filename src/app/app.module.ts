@@ -14,6 +14,7 @@ import { AuthGuard } from './auth.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './custom.serializer';
 import { CustomersComponent } from './components/customers/customers.component';
+import { WidgetsModule } from 'widgets';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { CustomersComponent } from './components/customers/customers.component';
     EffectsModule.forRoot([]),
     AuthModule.forRoot(),
     TodosModule,
+    WidgetsModule,
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
       stateKey: 'router'
