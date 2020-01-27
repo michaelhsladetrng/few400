@@ -16,10 +16,7 @@ import { CustomSerializer } from './custom.serializer';
 import { CustomersComponent } from './components/customers/customers.component';
 import { WidgetsModule } from 'widgets';
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomersComponent
-  ],
+  declarations: [AppComponent, CustomersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,14 +24,15 @@ import { WidgetsModule } from 'widgets';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
     AuthModule.forRoot(),
+    ng testWidgetsModule,
     TodosModule,
-    WidgetsModule,
+
     StoreRouterConnectingModule.forRoot({
-      serializer: CustomSerializer,
+      // serializer: CustomSerializer,
       stateKey: 'router'
     })
   ],
   providers: [httpInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
