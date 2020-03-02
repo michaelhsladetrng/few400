@@ -9,6 +9,9 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Store } from '@ngrx/store';
 import { TodosState } from '../reducers';
+import { TodoDataService } from '../services/todo-data.service';
+import { ConnectWsService } from '../services/connectWs.service';
+
 @Injectable()
 export class ListEffects {
 
@@ -17,7 +20,7 @@ export class ListEffects {
   addItem$ = createEffect(() =>
     this.actions$.pipe(
       ofType(listActions.listItemAdded),
-      switchMap(a => this.client.post<TodoEntity>(environment.todosUrl, { description: a.payload.description })
+      switchMap(a => this.service.addItem(a.payload.description)
         .pipe(
           map(r => listActions.listItemAddedSucceeded({ oldId: a.payload.id, payload: r })),
           catchError(err => of(listActions.listItemAddedFailure({ message: err.message, payload: a.payload })))
@@ -29,7 +32,7 @@ export class ListEffects {
   loadList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(listActions.loadListData),
-      switchMap(() => this.client.get<TodoEntity[]>(environment.todosUrl)
+      switchMap(() => this.service.loadList()
         .pipe(
           map(r => listActions.loadListDataSucceeded({ payload: r })),
           catchError(err => of(listActions.loadListDataFailure({ message: err.message })))
@@ -38,19 +41,19 @@ export class ListEffects {
     )
     , { dispatch: true });
 
-  constructor(private actions$: Actions, private client: HttpClient, private store: Store<TodosState>) {
+  constructor(
+    private service: TodoDataService,
+    private connectWsService: ConnectWsService,
+    private actions$: Actions,
+    private store: Store<TodosState>) {
     this.connectWs();
   }
 
   connectWs() {
-    this.socket = io(environment.todosWsUrl);
-
-    this.socket.on('connect', () => {
-      console.log('Connected to the Web Socket Server');
-    });
+    this.socket = this.connectWsService.connectWs(); // io(environment.todosWsUrl);
 
     this.socket.on('todo-added', (data: TodoEntity) => {
-      //      console.log('got ', data);
+      console.log('got ', data);
       this.store.dispatch(listActions.gotTodoFromWebSocket({ payload: data }));
 
     });

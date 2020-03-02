@@ -19,7 +19,6 @@ export const listItemAddedSucceeded = createAction(
   props<{ oldId: string, payload: TodoEntity }>()
 );
 
-
 export const listItemAddedFailure = createAction(
   '[todos] list item added failure',
   props<{ message: string, payload: TodoEntity }>()
@@ -33,7 +32,6 @@ export const loadListDataSucceeded = createAction(
   '[todos] load list data succeeded',
   props<{ payload: TodoEntity[] }>()
 );
-
 
 export const loadListDataFailure = createAction(
   '[todos] load list data failed',

@@ -15,6 +15,10 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './custom.serializer';
 import { CustomersComponent } from './components/customers/customers.component';
 import { WidgetsModule } from 'widgets';
+import { TodoDataService } from './features/todos/services/todo-data.service';
+import { EnvironmentService } from './features/todos/services/environment.service';
+import { ConnectWsService } from './features/todos/services/connectWs.service';
+
 @NgModule({
   declarations: [AppComponent, CustomersComponent],
   imports: [
@@ -24,7 +28,7 @@ import { WidgetsModule } from 'widgets';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
     AuthModule.forRoot(),
-    ng testWidgetsModule,
+    WidgetsModule,
     TodosModule,
 
     StoreRouterConnectingModule.forRoot({
@@ -32,7 +36,13 @@ import { WidgetsModule } from 'widgets';
       stateKey: 'router'
     })
   ],
-  providers: [httpInterceptorProviders, AuthGuard],
+  providers: [
+    httpInterceptorProviders,
+    AuthGuard,
+    TodoDataService,
+    EnvironmentService,
+    ConnectWsService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

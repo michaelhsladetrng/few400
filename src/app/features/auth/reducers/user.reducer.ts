@@ -5,7 +5,6 @@ export interface UserState {
   isLoggedIn: boolean;
 }
 
-
 const initialState: UserState = {
   name: null,
   isLoggedIn: false
